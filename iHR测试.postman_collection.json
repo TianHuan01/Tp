@@ -1,0 +1,503 @@
+{
+	"info": {
+		"_postman_id": "615d6715-d0eb-4809-9f7d-53b2a64b3663",
+		"name": "iHR测试",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "登录模块接口测试",
+			"item": [
+				{
+					"name": "用户名为6位失败(前提是已注册)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "182046b0-5600-481e-a056-89d417ce95d5",
+								"exec": [
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(false);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"mobile\":\"123456\",\r\n\"password\":\"123456\"}"
+						},
+						"url": {
+							"raw": "{{url}}/api/sys/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"sys",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "用户名为空失败",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0e5b480a-757c-4e4f-9a91-5482187476de",
+								"exec": [
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(false);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"mobile\":\"\",\r\n\"password\":\"123456\"}"
+						},
+						"url": {
+							"raw": "{{url}}/api/sys/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"sys",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "用户名未注册失败",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "03798836-0331-44fa-82f6-bba788414a9b",
+								"exec": [
+									"pm.test(\"用户名未注册\", function () {",
+									"    pm.expect(pm.response.text()).to.include(false);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"mobile\":\"1234567\",\r\n\"password\":\"123456\"}"
+						},
+						"url": {
+							"raw": "{{url}}/api/sys/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"sys",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "用户名重复登录(成功)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0c1ed827-5c36-4692-b3af-39f5c3d49126",
+								"exec": [
+									"pm.test(\"重复登录\", function () {",
+									"    pm.expect(pm.response.text()).to.include(true);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"mobile\":\"13800000002\",\r\n\"password\":\"123456\"}"
+						},
+						"url": {
+							"raw": "{{url}}/api/sys/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"sys",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "密码为空登录失败",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "567d3f08-5829-482e-be7f-ac338a3ad8a4",
+								"exec": [
+									"pm.test(\"密码为空\", function () {",
+									"    pm.expect(pm.response.text()).to.include(false);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"mobile\":\"13800000002\",\r\n\"password\":\"\"}"
+						},
+						"url": {
+							"raw": "{{url}}/api/sys/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"sys",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "密码不正确",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8f2753a9-1ad8-4ffd-a141-835fc7223621",
+								"exec": [
+									"pm.test(\"密码错误\", function () {",
+									"    pm.expect(pm.response.text()).to.include(false);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"mobile\":\"13800000002\",\r\n\"password\":\"1234566\"}"
+						},
+						"url": {
+							"raw": "{{url}}/api/sys/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"sys",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "添加员工接口测试",
+			"item": [],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "查询员工",
+			"item": [],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "删除员工",
+			"item": [],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "增删改查正向用例",
+			"item": [
+				{
+					"name": "登录员工",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "90deb8d3-ed8b-47ae-95d4-72894d552e48",
+								"exec": [
+									"var logindata = pm.response.json().data",
+									"",
+									"//控制台输出",
+									"console.info(logindata)",
+									"",
+									"pm.environment.set(\"logindata\", \"Bearer \" + logindata);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"mobile\":\"13800000002\",\r\n\"password\":\"123456\"}"
+						},
+						"url": {
+							"raw": "{{url}}/api/sys/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"sys",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "查询用户信息",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d3fb758c-3dfd-4692-8ca1-2e376844c441",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"操作成功\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{logindata}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}//api/sys/user/:target",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"",
+								"api",
+								"sys",
+								"user",
+								":target"
+							],
+							"variable": [
+								{
+									"key": "target",
+									"value": "{{selecdata}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "添加员工",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ef1725c3-d335-459f-938d-7610ca03557e",
+								"exec": [
+									"var data = pm.response.json().data.id",
+									"",
+									"console.info(data)",
+									"",
+									"pm.environment.set(\"selecdata\",data);",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{logindata}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\": \"smick\",\r\n    \"mobile\": \"18219740010\",\r\n    \"timeOfEntry\": \"2019-07-01\",\r\n    \"formOfEmployment\": 1,\r\n    \"workNumber\": \"0001\",\r\n    \"departmentName\": \"开发部\",\r\n    \"departmentId\": \"1066240656856453120\",\r\n    \"correctionTime\": \"2019-11-30\"}"
+						},
+						"url": {
+							"raw": "{{url}}/api/sys/user",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"sys",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "删除员工信息",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a8f97997-d21b-4d9e-ad00-9f1d565ae0e8",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"删除成功\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"操作成功\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{selecdata}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/sys/user/:target",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"sys",
+								"user",
+								":target"
+							],
+							"variable": [
+								{
+									"key": "target",
+									"value": "{{logindata}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
